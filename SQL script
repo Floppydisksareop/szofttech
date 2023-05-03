@@ -1,0 +1,33 @@
+CREATE DATABASE Tabletennis;
+
+USE Tabletennis;
+
+CREATE TABLE users (
+  username VARCHAR(255) NOT NULL PRIMARY KEY,
+  password VARCHAR(255) NOT NULL,
+  is_admin BOOLEAN NOT NULL
+);
+
+CREATE TABLE tournaments (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  start_date DATE NOT NULL,
+  end_date DATE NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  organiser VARCHAR(255) NOT NULL,
+  FOREIGN KEY (organiser) REFERENCES users(username)
+);
+
+CREATE TABLE users_tournaments (
+  username VARCHAR(255) NOT NULL,
+  tournament_id INT NOT NULL,
+  PRIMARY KEY (username, tournament_id),
+  FOREIGN KEY (username) REFERENCES users(username),
+  FOREIGN KEY (tournament_id) REFERENCES tournaments(id)
+);
+
+INSERT INTO users (username, password, is_admin) VALUES
+  ('user1', '1234', FALSE),
+  ('user2', '1234', FALSE),
+  ('user3', '1234', FALSE),
+  ('user4', '1234', FALSE),
+  ('user5', '1234', FALSE);
