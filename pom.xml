@@ -51,7 +51,8 @@
           <version>5.7.2</version>
 
       </dependency>
-  </dependencies>
+
+    </dependencies>
 
   <build>
         <plugins>

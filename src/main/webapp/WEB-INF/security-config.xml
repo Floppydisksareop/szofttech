@@ -1,0 +1,26 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/security
+                        http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <security:http auto-config="true">
+        <security:intercept-url pattern="/" access="permitAll" />
+        <security:intercept-url pattern="/home.jsp" access="permitAll" />
+        <security:intercept-url pattern="/login.jsp" access="permitAll" />
+        <security:intercept-url pattern="/**" access="authenticated" />
+        <security:form-login login-page="/login.jsp" authentication-failure-url="/login.jsp?error=true" />
+        <security:logout logout-url="/logout" logout-success-url="/home.jsp" />
+    </security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:user-service>
+                <security:user name="user" password="{noop}password" authorities="ROLE_USER" />
+                <security:user name="admin" password="{noop}password" authorities="ROLE_USER,ROLE_ADMIN" />
+            </security:user-service>
+        </security:authentication-provider>
+    </security:authentication-manager>
+    </beans>
